@@ -12,6 +12,7 @@ import { TableNode, TableCellNode, TableRowNode, $isTableNode, $isTableRowNode, 
 import { TextNode, $applyNodeReplacement, DecoratorNode, createEditor, $getNodeByKey, $setSelection, $isElementNode, $isParagraphNode, $isTextNode, $createParagraphNode, $createTextNode, createCommand, $getSelection, $isRangeSelection, COMMAND_PRIORITY_EDITOR, REDO_COMMAND, UNDO_COMMAND, $getRoot, CLEAR_EDITOR_COMMAND, SELECTION_CHANGE_COMMAND, COMMAND_PRIORITY_LOW as COMMAND_PRIORITY_LOW$1, FORMAT_TEXT_COMMAND, $getNearestNodeFromDOMNode, INDENT_CONTENT_COMMAND, COMMAND_PRIORITY_CRITICAL, FOCUS_COMMAND, $insertNodes, $isRootOrShadowRoot, DRAGSTART_COMMAND, COMMAND_PRIORITY_HIGH, DRAGOVER_COMMAND, DROP_COMMAND, $createRangeSelection, $isNodeSelection, FORMAT_ELEMENT_COMMAND, OUTDENT_CONTENT_COMMAND, $isRootNode, DEPRECATED_$isGridSelection, CAN_UNDO_COMMAND, CAN_REDO_COMMAND } from 'lexical';
 import { useCollaborationContext } from '@lexical/react/LexicalCollaborationContext';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
+export { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { CollaborationPlugin } from '@lexical/react/LexicalCollaborationPlugin';
 import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
 import { LexicalNestedComposer } from '@lexical/react/LexicalNestedComposer';

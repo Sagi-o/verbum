@@ -7025,6 +7025,12 @@ var ImageComponent$2 = {
   'default': ImageComponent$1
 };
 
+Object.defineProperty(exports, 'useLexicalComposerContext', {
+  enumerable: true,
+  get: function () {
+    return LexicalComposerContext.useLexicalComposerContext;
+  }
+});
 exports.AlignDropdown = AlignDropdown;
 exports.BackgroundColorPicker = BackgroundColorPicker;
 exports.BoldButton = BoldButton;

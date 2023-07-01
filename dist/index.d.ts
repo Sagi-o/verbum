@@ -5,4 +5,5 @@ import MentionsPlugin from './plugins/MentionsPlugin';
 import { AlignDropdown, BackgroundColorPicker, BoldButton, CodeFormatButton, FloatingLinkEditor, FontFamilyDropdown, FontSizeDropdown, InsertDropdown, InsertLinkButton, ItalicButton, TextColorPicker, TextFormatDropdown, UnderlineButton } from './plugins/ToolbarPlugin/components';
 import * as ToolbarTypes from './types';
 import Divider from './ui/Divider';
-export { EditorComposer, Editor, ToolbarPlugin, AlignDropdown, BackgroundColorPicker, BoldButton, CodeFormatButton, FloatingLinkEditor, FontFamilyDropdown, FontSizeDropdown, InsertDropdown, InsertLinkButton, ItalicButton, TextColorPicker, TextFormatDropdown, UnderlineButton, ToolbarTypes, Divider, MentionsPlugin, };
+import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
+export { EditorComposer, Editor, ToolbarPlugin, AlignDropdown, BackgroundColorPicker, BoldButton, CodeFormatButton, FloatingLinkEditor, FontFamilyDropdown, FontSizeDropdown, InsertDropdown, InsertLinkButton, ItalicButton, TextColorPicker, TextFormatDropdown, UnderlineButton, ToolbarTypes, Divider, MentionsPlugin, useLexicalComposerContext, };
