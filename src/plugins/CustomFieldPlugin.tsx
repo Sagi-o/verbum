@@ -13,6 +13,13 @@ import * as React from 'react';
 
 type Params = { text: string; id?: string };
 
+type CustomFieldPluginProps = {
+  itemClassName?: string;
+  listStyle?: Record<string, any>;
+  itemStyle?: Record<string, any>;
+  record?: Record<string, any>;
+};
+
 const INSERT_CUSTOM_FIELD_COMMAND: LexicalCommand<Params> = createCommand();
 
 export default function CustomFieldPlugin({
@@ -20,12 +27,7 @@ export default function CustomFieldPlugin({
   listStyle = {},
   itemStyle = {},
   record = {},
-}: {
-  itemClassName: string;
-  listStyle: Record<string, any>;
-  itemStyle: Record<string, any>;
-  record?: Record<string, any>;
-}) {
+}: CustomFieldPluginProps) {
   const [editor] = useLexicalComposerContext();
 
   React.useEffect(() => {

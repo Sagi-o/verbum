@@ -17,7 +17,7 @@ interface IEditorProps {
     listMaxIndent?: number;
     isEditable?: boolean;
     locale?: 'en' | 'fr' | 'ptBr' | 'ru' | null;
-    onChange?: (editorState: string, editorInstance?: LexicalEditor) => void;
+    onChange?: (editorState: string, html: string, editorInstance?: LexicalEditor) => void;
 }
 declare const Editor: ({ children, hashtagsEnabled, autoLinkEnabled, emojisEnabled, actionsEnabled, listMaxIndent, placeholder, isEditable, locale, onChange, }: IEditorProps) => JSX.Element;
 export default Editor;

@@ -49,6 +49,7 @@ var selection = require('@lexical/selection');
 require('@lexical/text');
 var useLexicalTextEntity = require('@lexical/react/useLexicalTextEntity');
 var LexicalMarkdownShortcutPlugin = require('@lexical/react/LexicalMarkdownShortcutPlugin');
+var html = require('@lexical/html');
 var useChild = _interopDefault(require('use-child'));
 var LexicalTablePlugin = require('@lexical/react/LexicalTablePlugin');
 var LexicalTypeaheadMenuPlugin = require('@lexical/react/LexicalTypeaheadMenuPlugin');
@@ -4186,7 +4187,8 @@ var Editor = _ref => {
     ErrorBoundary: LexicalErrorBoundary
   }), /*#__PURE__*/React__default.createElement(LexicalOnChangePlugin.OnChangePlugin, {
     onChange: editorState => {
-      _onChange == null ? void 0 : _onChange(JSON.stringify(editorState), activeEditor);
+      var html$1 = html.$generateHtmlFromNodes(editor);
+      _onChange == null ? void 0 : _onChange(JSON.stringify(editorState), html$1, activeEditor);
       return editorStateRef.current = editorState;
     }
   }), /*#__PURE__*/React__default.createElement(MarkdownPlugin, null), /*#__PURE__*/React__default.createElement(CodeHighlightPlugin, null), /*#__PURE__*/React__default.createElement(LexicalListPlugin.ListPlugin, null), /*#__PURE__*/React__default.createElement(LexicalCheckListPlugin.CheckListPlugin, null), /*#__PURE__*/React__default.createElement(ListMaxIndentLevelPlugin, {
