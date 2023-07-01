@@ -8,6 +8,7 @@ export type SerializedCustomFieldNode = Spread<
         id: string;
         className: string;
         type: 'custom-field';
+        version: 1;
     },
     typeof SerializedTextNode
 >;
@@ -74,9 +75,11 @@ export class CustomFieldNode extends TextNode {
     exportJSON(): SerializedCustomFieldNode {
         return {
             ...super.exportJSON(),
-            className: this.getClassName(),
             id: this.getId(),
             text: this.getText(),
+            className: this.getClassName(),
+            type: 'custom-field',
+            version: 1,
         };
     }
 }

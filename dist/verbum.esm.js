@@ -1680,9 +1680,11 @@ class CustomFieldNode extends TextNode {
 
   exportJSON() {
     return _extends({}, super.exportJSON(), {
-      className: this.getClassName(),
       id: this.getId(),
-      text: this.getText()
+      text: this.getText(),
+      className: this.getClassName(),
+      type: 'custom-field',
+      version: 1
     });
   }
 

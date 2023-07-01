@@ -6,6 +6,7 @@ export declare type SerializedCustomFieldNode = Spread<{
     id: string;
     className: string;
     type: 'custom-field';
+    version: 1;
 }, typeof SerializedTextNode>;
 export declare class CustomFieldNode extends TextNode {
     __id: string;
