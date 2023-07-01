@@ -23,6 +23,8 @@ import {
   UndoButton,
 } from './plugins/ToolbarPlugin/components';
 
+import CustomFieldPlugin from './plugins/CustomFieldPlugin';
+
 import * as ToolbarTypes from './types';
 import Divider from './ui/Divider';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
@@ -31,6 +33,7 @@ export {
   EditorComposer,
   Editor,
   ToolbarPlugin,
+  CustomFieldPlugin,
   AlignDropdown,
   BackgroundColorPicker,
   BoldButton,

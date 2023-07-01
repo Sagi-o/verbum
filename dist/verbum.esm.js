@@ -7027,6 +7027,116 @@ var UnderlineButton = () => {
   }));
 };
 
+class CustomFieldNode extends TextNode {
+  constructor(text, id, key) {
+    super(text, key);
+    this.__id = id;
+  }
+
+  static getType() {
+    return 'custom-field';
+  }
+
+  static clone(node) {
+    return new CustomFieldNode(node.__text, node.__id, node.__key);
+  }
+
+  createDOM(config) {
+    // Define the DOM element here
+    var dom = document.createElement('p');
+    dom.setAttribute('contenteditable', 'false');
+    dom.className = 'custom-field';
+    var self = this.getLatest();
+    dom.innerHTML = self.__text;
+    dom.id = self.__id;
+    return dom;
+  }
+
+  updateDOM(prevNode, dom) {
+    // Returning false tells Lexical that this node does not need its
+    // DOM element replacing with a new copy from createDOM.
+    return false;
+  }
+
+  getClassName() {
+    var self = this.getLatest();
+    return self.__className;
+  }
+
+  getId() {
+    var self = this.getLatest();
+    return self.__id;
+  }
+
+  getText() {
+    var self = this.getLatest();
+    return self.__text;
+  }
+
+  static importJSON(serializedNode) {
+    var node = $createCustomFieldNode(serializedNode.text, serializedNode.id);
+    node.setStyle(serializedNode.style);
+    return node;
+  }
+
+  exportJSON() {
+    return _extends({}, super.exportJSON(), {
+      className: this.getClassName(),
+      id: this.getId(),
+      text: this.getText()
+    });
+  }
+
+}
+function $createCustomFieldNode(text, id, key) {
+  return new CustomFieldNode(text, id, key);
+}
+
+var INSERT_CUSTOM_FIELD_COMMAND = /*#__PURE__*/createCommand();
+function CustomFieldPlugin(_ref) {
+  var {
+    listStyle = {},
+    itemStyle = {},
+    record = {}
+  } = _ref;
+  var [editor] = useLexicalComposerContext();
+  useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    if (!editor.hasNodes([CustomFieldNode])) {
+      throw new Error('CustomFieldPlugin: CustomFieldNode not registered on editor');
+    }
+
+    return editor.registerCommand(INSERT_CUSTOM_FIELD_COMMAND, payload => {
+      var selection = $getSelection();
+      var customFieldNode = $createCustomFieldNode(payload.text, payload.id);
+      selection.insertNodes([customFieldNode]);
+      return true;
+    }, COMMAND_PRIORITY_EDITOR);
+  }, [editor]);
+
+  var _onClick = params => {
+    editor.update(() => {
+      editor.dispatchCommand(INSERT_CUSTOM_FIELD_COMMAND, params);
+    });
+  };
+
+  var entries = Object.entries(record);
+  return /*#__PURE__*/createElement("div", {
+    style: listStyle
+  }, entries.map(_ref2 => {
+    var [key, value] = _ref2;
+    return /*#__PURE__*/createElement("div", {
+      key: key,
+      style: itemStyle,
+      onClick: () => _onClick({
+        text: value,
+        id: key
+      })
+    }, value);
+  }));
+}
+
 
 
 var index = {
@@ -7100,5 +7210,5 @@ var ImageComponent$2 = {
   'default': ImageComponent$1
 };
 
-export { AlignDropdown, BackgroundColorPicker, BoldButton, CodeFormatButton, Divider$1 as Divider, Editor, EditorComposer, FloatingLinkEditor, FontFamilyDropdown, FontSizeDropdown, InsertDropdown, InsertLinkButton, ItalicButton, MentionsPlugin, TextColorPicker, TextFormatDropdown, ToolbarPlugin, index as ToolbarTypes, UnderlineButton };
+export { AlignDropdown, BackgroundColorPicker, BoldButton, CodeFormatButton, CustomFieldPlugin, Divider$1 as Divider, Editor, EditorComposer, FloatingLinkEditor, FontFamilyDropdown, FontSizeDropdown, InsertDropdown, InsertLinkButton, ItalicButton, MentionsPlugin, TextColorPicker, TextFormatDropdown, ToolbarPlugin, index as ToolbarTypes, UnderlineButton };
 //# sourceMappingURL=verbum.esm.js.map

@@ -21,10 +21,18 @@ import {
   UnderlineButton,
   UndoButton,
 } from '../src/plugins/ToolbarPlugin/components';
+// import { CustomFieldPlugin } from '../src/plugins/CustomFieldPlugin';
+import { CustomFieldNode } from '../src/nodes/CustomFieldNode';
 import { $createParagraphNode, $createTextNode, $getRoot } from 'lexical';
 
 export default {
   title: 'Verbum',
+};
+
+const VALUE_MAPPINGS = {
+  'key1': 'Value 1',
+  'key2': 'Value 2',
+  'key3': 'Value 3',
 };
 
 const initialState = () => {
@@ -37,8 +45,9 @@ const initialState = () => {
 };
 
 export const FullEditor = () => (
-  <EditorComposer initialEditorState={initialState}>
+  <EditorComposer initialEditorState={initialState} extraNodes={[CustomFieldNode]}>
     <Editor>
+      {/* <CustomFieldPlugin record={VALUE_MAPPINGS} /> */}
       <ToolbarPlugin>
         <FontFamilyDropdown />
         <FontSizeDropdown />

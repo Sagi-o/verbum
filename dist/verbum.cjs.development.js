@@ -6952,6 +6952,116 @@ var UnderlineButton = () => {
   }));
 };
 
+class CustomFieldNode extends lexical.TextNode {
+  constructor(text, id, key) {
+    super(text, key);
+    this.__id = id;
+  }
+
+  static getType() {
+    return 'custom-field';
+  }
+
+  static clone(node) {
+    return new CustomFieldNode(node.__text, node.__id, node.__key);
+  }
+
+  createDOM(config) {
+    // Define the DOM element here
+    var dom = document.createElement('p');
+    dom.setAttribute('contenteditable', 'false');
+    dom.className = 'custom-field';
+    var self = this.getLatest();
+    dom.innerHTML = self.__text;
+    dom.id = self.__id;
+    return dom;
+  }
+
+  updateDOM(prevNode, dom) {
+    // Returning false tells Lexical that this node does not need its
+    // DOM element replacing with a new copy from createDOM.
+    return false;
+  }
+
+  getClassName() {
+    var self = this.getLatest();
+    return self.__className;
+  }
+
+  getId() {
+    var self = this.getLatest();
+    return self.__id;
+  }
+
+  getText() {
+    var self = this.getLatest();
+    return self.__text;
+  }
+
+  static importJSON(serializedNode) {
+    var node = $createCustomFieldNode(serializedNode.text, serializedNode.id);
+    node.setStyle(serializedNode.style);
+    return node;
+  }
+
+  exportJSON() {
+    return _extends({}, super.exportJSON(), {
+      className: this.getClassName(),
+      id: this.getId(),
+      text: this.getText()
+    });
+  }
+
+}
+function $createCustomFieldNode(text, id, key) {
+  return new CustomFieldNode(text, id, key);
+}
+
+var INSERT_CUSTOM_FIELD_COMMAND = /*#__PURE__*/lexical.createCommand();
+function CustomFieldPlugin(_ref) {
+  var {
+    listStyle = {},
+    itemStyle = {},
+    record = {}
+  } = _ref;
+  var [editor] = LexicalComposerContext.useLexicalComposerContext();
+  React.useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    if (!editor.hasNodes([CustomFieldNode])) {
+      throw new Error('CustomFieldPlugin: CustomFieldNode not registered on editor');
+    }
+
+    return editor.registerCommand(INSERT_CUSTOM_FIELD_COMMAND, payload => {
+      var selection = lexical.$getSelection();
+      var customFieldNode = $createCustomFieldNode(payload.text, payload.id);
+      selection.insertNodes([customFieldNode]);
+      return true;
+    }, lexical.COMMAND_PRIORITY_EDITOR);
+  }, [editor]);
+
+  var _onClick = params => {
+    editor.update(() => {
+      editor.dispatchCommand(INSERT_CUSTOM_FIELD_COMMAND, params);
+    });
+  };
+
+  var entries = Object.entries(record);
+  return /*#__PURE__*/React.createElement("div", {
+    style: listStyle
+  }, entries.map(_ref2 => {
+    var [key, value] = _ref2;
+    return /*#__PURE__*/React.createElement("div", {
+      key: key,
+      style: itemStyle,
+      onClick: () => _onClick({
+        text: value,
+        id: key
+      })
+    }, value);
+  }));
+}
+
 
 
 var index = {
@@ -7035,6 +7145,7 @@ exports.AlignDropdown = AlignDropdown;
 exports.BackgroundColorPicker = BackgroundColorPicker;
 exports.BoldButton = BoldButton;
 exports.CodeFormatButton = CodeFormatButton;
+exports.CustomFieldPlugin = CustomFieldPlugin;
 exports.Divider = Divider$1;
 exports.Editor = Editor;
 exports.EditorComposer = EditorComposer;
