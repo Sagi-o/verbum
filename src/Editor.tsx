@@ -111,8 +111,10 @@ const Editor = ({
           />
           <OnChangePlugin
             onChange={(editorState) => {
-              const html = $generateHtmlFromNodes(editor);
-              onChange?.(JSON.stringify(editorState), html, activeEditor);
+              editor.update(() => {
+                const html = $generateHtmlFromNodes(editor);
+                onChange?.(JSON.stringify(editorState), html, activeEditor);                
+              });
               return (editorStateRef.current = editorState);
             }}
           />

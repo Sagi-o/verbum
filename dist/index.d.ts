@@ -7,4 +7,5 @@ import CustomFieldPlugin from './plugins/CustomFieldPlugin';
 import * as ToolbarTypes from './types';
 import Divider from './ui/Divider';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-export { EditorComposer, Editor, ToolbarPlugin, CustomFieldPlugin, AlignDropdown, BackgroundColorPicker, BoldButton, CodeFormatButton, FloatingLinkEditor, FontFamilyDropdown, FontSizeDropdown, InsertDropdown, InsertLinkButton, ItalicButton, TextColorPicker, TextFormatDropdown, UnderlineButton, ToolbarTypes, Divider, MentionsPlugin, useLexicalComposerContext, };
+import { $generateHtmlFromNodes, $generateNodesFromDOM } from '@lexical/html';
+export { EditorComposer, Editor, ToolbarPlugin, CustomFieldPlugin, AlignDropdown, BackgroundColorPicker, BoldButton, CodeFormatButton, FloatingLinkEditor, FontFamilyDropdown, FontSizeDropdown, InsertDropdown, InsertLinkButton, ItalicButton, TextColorPicker, TextFormatDropdown, UnderlineButton, ToolbarTypes, Divider, MentionsPlugin, useLexicalComposerContext, $generateHtmlFromNodes, $generateNodesFromDOM, };

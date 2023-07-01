@@ -4187,8 +4187,10 @@ var Editor = _ref => {
     ErrorBoundary: LexicalErrorBoundary
   }), /*#__PURE__*/React__default.createElement(LexicalOnChangePlugin.OnChangePlugin, {
     onChange: editorState => {
-      var html$1 = html.$generateHtmlFromNodes(editor);
-      _onChange == null ? void 0 : _onChange(JSON.stringify(editorState), html$1, activeEditor);
+      editor.update(() => {
+        var html$1 = html.$generateHtmlFromNodes(editor);
+        _onChange == null ? void 0 : _onChange(JSON.stringify(editorState), html$1, activeEditor);
+      });
       return editorStateRef.current = editorState;
     }
   }), /*#__PURE__*/React__default.createElement(MarkdownPlugin, null), /*#__PURE__*/React__default.createElement(CodeHighlightPlugin, null), /*#__PURE__*/React__default.createElement(LexicalListPlugin.ListPlugin, null), /*#__PURE__*/React__default.createElement(LexicalCheckListPlugin.CheckListPlugin, null), /*#__PURE__*/React__default.createElement(ListMaxIndentLevelPlugin, {
@@ -7143,6 +7145,18 @@ Object.defineProperty(exports, 'useLexicalComposerContext', {
   enumerable: true,
   get: function () {
     return LexicalComposerContext.useLexicalComposerContext;
+  }
+});
+Object.defineProperty(exports, '$generateHtmlFromNodes', {
+  enumerable: true,
+  get: function () {
+    return html.$generateHtmlFromNodes;
+  }
+});
+Object.defineProperty(exports, '$generateNodesFromDOM', {
+  enumerable: true,
+  get: function () {
+    return html.$generateNodesFromDOM;
   }
 });
 exports.AlignDropdown = AlignDropdown;

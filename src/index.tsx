@@ -28,6 +28,7 @@ import CustomFieldPlugin from './plugins/CustomFieldPlugin';
 import * as ToolbarTypes from './types';
 import Divider from './ui/Divider';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
+import { $generateHtmlFromNodes, $generateNodesFromDOM } from '@lexical/html';
 
 export {
   EditorComposer,
@@ -51,4 +52,6 @@ export {
   Divider,
   MentionsPlugin,
   useLexicalComposerContext,
+  $generateHtmlFromNodes,
+  $generateNodesFromDOM,
 };

@@ -44,6 +44,7 @@ import '@lexical/text';
 import { useLexicalTextEntity } from '@lexical/react/useLexicalTextEntity';
 import { MarkdownShortcutPlugin } from '@lexical/react/LexicalMarkdownShortcutPlugin';
 import { $generateHtmlFromNodes } from '@lexical/html';
+export { $generateHtmlFromNodes, $generateNodesFromDOM } from '@lexical/html';
 import useChild from 'use-child';
 import { TablePlugin } from '@lexical/react/LexicalTablePlugin';
 import { useBasicTypeaheadTriggerMatch, LexicalTypeaheadMenuPlugin, MenuOption } from '@lexical/react/LexicalTypeaheadMenuPlugin';
@@ -4247,8 +4248,10 @@ var Editor = _ref => {
     ErrorBoundary: LexicalErrorBoundary
   }), /*#__PURE__*/React__default.createElement(OnChangePlugin, {
     onChange: editorState => {
-      var html = $generateHtmlFromNodes(editor);
-      _onChange == null ? void 0 : _onChange(JSON.stringify(editorState), html, activeEditor);
+      editor.update(() => {
+        var html = $generateHtmlFromNodes(editor);
+        _onChange == null ? void 0 : _onChange(JSON.stringify(editorState), html, activeEditor);
+      });
       return editorStateRef.current = editorState;
     }
   }), /*#__PURE__*/React__default.createElement(MarkdownPlugin, null), /*#__PURE__*/React__default.createElement(CodeHighlightPlugin, null), /*#__PURE__*/React__default.createElement(ListPlugin, null), /*#__PURE__*/React__default.createElement(CheckListPlugin, null), /*#__PURE__*/React__default.createElement(ListMaxIndentLevelPlugin, {
