@@ -1601,7 +1601,6 @@ class CustomFieldNode extends lexical.TextNode {
   createDOM(config) {
     // Define the DOM element here
     var dom = document.createElement('p');
-    dom.setAttribute('contenteditable', 'false');
     dom.className = 'custom-field';
     var self = this.getLatest();
     dom.innerHTML = self.__text;
@@ -1632,7 +1631,6 @@ class CustomFieldNode extends lexical.TextNode {
 
   static importJSON(serializedNode) {
     var node = $createCustomFieldNode(serializedNode.text, serializedNode.id);
-    node.setStyle(serializedNode.style);
     return node;
   }
 
@@ -1641,7 +1639,7 @@ class CustomFieldNode extends lexical.TextNode {
       id: this.getId(),
       text: this.getText(),
       className: this.getClassName(),
-      type: 'custom-field',
+      type: CustomFieldNode.getType(),
       version: 1
     });
   }

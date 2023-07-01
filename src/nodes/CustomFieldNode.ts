@@ -32,7 +32,6 @@ export class CustomFieldNode extends TextNode {
     createDOM(config: EditorConfig): HTMLElement {
         // Define the DOM element here
         const dom = document.createElement('p');
-        dom.setAttribute('contenteditable', 'false');
         dom.className = 'custom-field';
 
         const self = this.getLatest();
@@ -68,7 +67,6 @@ export class CustomFieldNode extends TextNode {
             serializedNode.text,
             serializedNode.id,
         );
-        node.setStyle(serializedNode.style);
         return node;
     }
 
@@ -78,7 +76,7 @@ export class CustomFieldNode extends TextNode {
             id: this.getId(),
             text: this.getText(),
             className: this.getClassName(),
-            type: 'custom-field',
+            type: CustomFieldNode.getType(),
             version: 1,
         };
     }
