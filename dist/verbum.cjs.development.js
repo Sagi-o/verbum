@@ -7020,6 +7020,7 @@ var UnderlineButton = () => {
 var INSERT_CUSTOM_FIELD_COMMAND = /*#__PURE__*/lexical.createCommand();
 function CustomFieldPlugin(_ref) {
   var {
+    itemClassName = 'custom-field-selector',
     listStyle = {},
     itemStyle = {},
     record = {}
@@ -7054,6 +7055,7 @@ function CustomFieldPlugin(_ref) {
     return /*#__PURE__*/React.createElement("div", {
       key: key,
       style: itemStyle,
+      className: itemClassName,
       onClick: () => _onClick({
         text: value,
         id: key

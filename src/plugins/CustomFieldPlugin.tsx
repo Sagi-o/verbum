@@ -16,10 +16,12 @@ type Params = { text: string; id?: string };
 const INSERT_CUSTOM_FIELD_COMMAND: LexicalCommand<Params> = createCommand();
 
 export default function CustomFieldPlugin({
+  itemClassName = 'custom-field-selector',
   listStyle = {},
   itemStyle = {},
   record = {},
 }: {
+  itemClassName: string;
   listStyle: Record<string, any>;
   itemStyle: Record<string, any>;
   record?: Record<string, any>;
@@ -65,6 +67,7 @@ export default function CustomFieldPlugin({
         <div
           key={key}
           style={itemStyle}
+          className={itemClassName}
           onClick={() => onClick({ text: value, id: key })}
         >
           {value}
