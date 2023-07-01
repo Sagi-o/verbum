@@ -1584,6 +1584,71 @@ function $createYouTubeNode(videoID) {
   return new YouTubeNode(videoID);
 }
 
+class CustomFieldNode extends lexical.TextNode {
+  constructor(text, id, key) {
+    super(text, key);
+    this.__id = id;
+  }
+
+  static getType() {
+    return 'custom-field';
+  }
+
+  static clone(node) {
+    return new CustomFieldNode(node.__text, node.__id, node.__key);
+  }
+
+  createDOM(config) {
+    // Define the DOM element here
+    var dom = document.createElement('p');
+    dom.setAttribute('contenteditable', 'false');
+    dom.className = 'custom-field';
+    var self = this.getLatest();
+    dom.innerHTML = self.__text;
+    dom.id = self.__id;
+    return dom;
+  }
+
+  updateDOM(prevNode, dom) {
+    // Returning false tells Lexical that this node does not need its
+    // DOM element replacing with a new copy from createDOM.
+    return false;
+  }
+
+  getClassName() {
+    var self = this.getLatest();
+    return self.__className;
+  }
+
+  getId() {
+    var self = this.getLatest();
+    return self.__id;
+  }
+
+  getText() {
+    var self = this.getLatest();
+    return self.__text;
+  }
+
+  static importJSON(serializedNode) {
+    var node = $createCustomFieldNode(serializedNode.text, serializedNode.id);
+    node.setStyle(serializedNode.style);
+    return node;
+  }
+
+  exportJSON() {
+    return _extends({}, super.exportJSON(), {
+      className: this.getClassName(),
+      id: this.getId(),
+      text: this.getText()
+    });
+  }
+
+}
+function $createCustomFieldNode(text, id, key) {
+  return new CustomFieldNode(text, id, key);
+}
+
 /**
  * Copyright (c) Meta Platforms, Inc. and affiliates.
  *
@@ -1591,7 +1656,7 @@ function $createYouTubeNode(videoID) {
  * LICENSE file in the root directory of this source tree.
  *
  */
-var PlaygroundNodes = [richText.HeadingNode, list.ListNode, list.ListItemNode, richText.QuoteNode, code.CodeNode, table.TableNode, table.TableCellNode, table.TableRowNode, hashtag.HashtagNode, code.CodeHighlightNode, link.AutoLinkNode, link.LinkNode, overflow.OverflowNode, PollNode, StickyNode, ImageNode, MentionNode, EmojiNode, TypeaheadNode, KeywordNode, LexicalHorizontalRuleNode.HorizontalRuleNode, TweetNode, YouTubeNode, mark.MarkNode];
+var PlaygroundNodes = [richText.HeadingNode, list.ListNode, list.ListItemNode, richText.QuoteNode, code.CodeNode, table.TableNode, table.TableCellNode, table.TableRowNode, hashtag.HashtagNode, code.CodeHighlightNode, link.AutoLinkNode, link.LinkNode, overflow.OverflowNode, PollNode, StickyNode, ImageNode, MentionNode, EmojiNode, TypeaheadNode, KeywordNode, LexicalHorizontalRuleNode.HorizontalRuleNode, TweetNode, YouTubeNode, mark.MarkNode, CustomFieldNode];
 
 var toolbar = {
 	alignDropdown: {
@@ -6951,71 +7016,6 @@ var UnderlineButton = () => {
     className: "format underline"
   }));
 };
-
-class CustomFieldNode extends lexical.TextNode {
-  constructor(text, id, key) {
-    super(text, key);
-    this.__id = id;
-  }
-
-  static getType() {
-    return 'custom-field';
-  }
-
-  static clone(node) {
-    return new CustomFieldNode(node.__text, node.__id, node.__key);
-  }
-
-  createDOM(config) {
-    // Define the DOM element here
-    var dom = document.createElement('p');
-    dom.setAttribute('contenteditable', 'false');
-    dom.className = 'custom-field';
-    var self = this.getLatest();
-    dom.innerHTML = self.__text;
-    dom.id = self.__id;
-    return dom;
-  }
-
-  updateDOM(prevNode, dom) {
-    // Returning false tells Lexical that this node does not need its
-    // DOM element replacing with a new copy from createDOM.
-    return false;
-  }
-
-  getClassName() {
-    var self = this.getLatest();
-    return self.__className;
-  }
-
-  getId() {
-    var self = this.getLatest();
-    return self.__id;
-  }
-
-  getText() {
-    var self = this.getLatest();
-    return self.__text;
-  }
-
-  static importJSON(serializedNode) {
-    var node = $createCustomFieldNode(serializedNode.text, serializedNode.id);
-    node.setStyle(serializedNode.style);
-    return node;
-  }
-
-  exportJSON() {
-    return _extends({}, super.exportJSON(), {
-      className: this.getClassName(),
-      id: this.getId(),
-      text: this.getText()
-    });
-  }
-
-}
-function $createCustomFieldNode(text, id, key) {
-  return new CustomFieldNode(text, id, key);
-}
 
 var INSERT_CUSTOM_FIELD_COMMAND = /*#__PURE__*/lexical.createCommand();
 function CustomFieldPlugin(_ref) {
